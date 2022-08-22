@@ -16,15 +16,6 @@ const choices =['s', 'p','r'];
 const randomNumer= Math.floor(Math.random() * 3);;
 return choices[randomNumer];
 }
-
-function win(userChoice,computerChoice){
-    userScore++
-    userScore_span.innerHTML = userScore;
-    computerScore_span.innerHTML = computerScore;
-    result_p.innerHTML= `${converttoWord(userChoice)} beats ${converttoWord$}. you win! `;
-    document.getElementById(userChoice).classList.add('green-glow');
-}
-
 function converttoWord(letter){
     if(letter === 'r') return 'Rock';
     if(letter === 's') return 'Scissor';
@@ -32,16 +23,33 @@ function converttoWord(letter){
 
 } 
 
+function win(userChoice,computerChoice){
+    const userChoice_div = document.getElementById(userChoice);
+    userScore++
+    userScore_span.innerHTML = userScore;
+    computerScore_span.innerHTML = computerScore;
+    result_p.innerHTML= `${converttoWord(userChoice)} beats ${converttoWord(computerChoice)}. you win! `;
+    userChoice_div.classList.add('green-glow');
+    setTimeout(() => {userChoice_div.classList.remove('green-glow')}, 500);
+}
+
+
+
 function lose(userChoice,computerChoice){
+    const userChoice_div = document.getElementById(userChoice);
     computerScore++
     userScore_span.innerHTML = userScore;
     computerScore_span.innerHTML = computerScore;
     result_p.innerHTML= `${converttoWord(userChoice)} loses to ${converttoWord(computerChoice)}. you lost! `;
+    userChoice_div.classList.add('red-glow');
+    setTimeout(() => {userChoice_div.classList.remove('red-glow')}, 500);
 }
 
 function draw(userChoice,computerChoice){
-
+    const userChoice_div = document.getElementById(userChoice);
     result_p.innerHTML= `${converttoWord(userChoice)} equals ${converttoWord(computerChoice)}. Draw! `;
+    userChoice_div.classList.add('gray-glow');
+    setTimeout(() => {userChoice_div.classList.remove('gray-glow')}, 500);
 }
 
 function game(userChoice){
